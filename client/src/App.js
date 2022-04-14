@@ -67,7 +67,7 @@ function App() {
         <Flex>
 
           <Switch>
-            <Route path="/inverseKinematics"> <InverseForms angles={angles} /> </Route>
+            <Route exact path="/inverseKinematics"> <InverseForms angles={angles} /> </Route>
             <Route path="/forwardKinematics"> <ForwardForms /> </Route>
           </Switch>
 
