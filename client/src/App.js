@@ -1,10 +1,17 @@
 import "./App.css";
 import { fetchBodyTransform, fetchBodyParameter } from "./api";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { InverseForms } from "./componenets/Forms/InverseForms";
+import { ForwardForms } from "./componenets/Forms/ForwardForms";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Draw } from "./componenets/Draw";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
@@ -55,12 +62,45 @@ function App() {
 
   return (
     <div className="App">
-      <Flex>
-        <InverseForms angles={angles}/>
-        {traces && <Draw traces={traces} />}
-      </Flex>
+      <Router>
+
+        <Flex>
+
+          <Switch>
+            <Route path="/inverseKinematics"> <InverseForms angles={angles} /> </Route>
+            <Route path="/forwardKinematics"> <ForwardForms /> </Route>
+          </Switch>
+
+          {traces && <Draw traces={traces} />}
+        </Flex>
+
+        <Flex marginLeft={"10px"}>
+
+          <ul>
+            <li>
+              <Link to="/inverseKinematics">
+                <Text fontFamily={"cursive"} fontSize="20px" color="green">
+                  inverseKinematics
+                </Text>
+              </Link>
+            </li>
+            <li>
+              <Link to="/forwardKinematics">
+                <Text fontFamily={"cursive"} fontSize="20px" color="green">
+                  forwardKinematics
+                </Text>
+              </Link>
+            </li>
+          </ul>
+
+          </Flex>
+
+      </Router>
+
     </div>
   );
-}
+} 
 
 export default App;
+
+

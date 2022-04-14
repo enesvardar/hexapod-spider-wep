@@ -27,7 +27,7 @@ import {
   TableContainer,
 } from '@chakra-ui/react'
 
-export const InverseForms = ({angles}) => {
+export const InverseForms = ({ angles }) => {
 
   const coxia = useSelector((state) => state.body.coxia);
   const tibia = useSelector((state) => state.body.tibia);
@@ -48,7 +48,7 @@ export const InverseForms = ({angles}) => {
     dispatch(setFemuar(92));
 
   };
-  
+
   return (
     <Box width={"30%"}>
 
@@ -74,18 +74,19 @@ export const InverseForms = ({angles}) => {
           </Text>
           <Input onChange={(e) => { dispatch(setFemuar(Number(e.target.value))) }} value={femuar} marginLeft={1} width="100px" type={"number"} />
         </Box>
-
+        <Box marginTop={"30px"} marginLeft={"15px"}>
+          <Button onClick={() => onClick()} colorScheme="blue">
+            Reset
+          </Button>
+        </Box>
       </Flex>
 
-      <Tslider />
-      <Rslider />
-      <Flex marginLeft={"30px"}>
-        <Button onClick={() => onClick()} colorScheme="blue">
-          Reset
-        </Button>
-      </Flex>
-      
-      <TableContainer>
+      <Box marginTop={"45px"}>
+        <Tslider />
+        <Rslider />
+      </Box>
+
+      <TableContainer marginTop={"45px"}>
         <Table variant='simple'>
           <Thead>
             <Tr>
@@ -99,8 +100,8 @@ export const InverseForms = ({angles}) => {
             {
               angles && (
 
-                angles.map((item) => (
-                  <Tr>
+                angles.map((item, index) => (
+                  <Tr key={index}>
                     <Td fontFamily={"cursive"} fontSize="20px" color="tomato">{item.name}</Td>
                     <Td fontFamily={"cursive"} fontSize="20px" color="tomato" isNumeric>{item.alpha}</Td>
                     <Td fontFamily={"cursive"} fontSize="20px" color="tomato" isNumeric>{item.beta}</Td>
