@@ -19,7 +19,7 @@ export const ForwardForms = () => {
             </Text>
             {
                 legName.map((name, index) => (
-                    <Flex marginLeft={"30px"}>
+                    <Flex key = {index} marginLeft={"30px"}>
                         <Box margin={"30px"}>
                             <Text fontFamily={"cursive"} fontSize="20px" color="green">
                                 {name}
