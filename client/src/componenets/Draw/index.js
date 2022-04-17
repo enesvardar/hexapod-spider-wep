@@ -4,7 +4,7 @@ import { genTemplate } from "../Template";
 
 export const Draw = ({ traces }) => {
   
-  var template = (genTemplate(traces))
+  var template = (genTemplate(traces)) // backend üzerinden gelen traces datasına göre çizim template oluşturuluyor.
 
   return (
     traces && (
