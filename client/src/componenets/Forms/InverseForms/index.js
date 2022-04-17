@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
 import React from "react";
 import { Tslider } from "../../Sliders/Tslider";
 import { Rslider } from "../../Sliders/Rslider";
-import { useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setRx,
   setRy,
@@ -23,12 +23,13 @@ import {
 } from "@chakra-ui/react";
 import { Navbars } from "../../Navbars";
 
+// Bu form hexapod tx/ty/tz/rx/ry/rz değerlerini güncellemek için oluşturuldu
 export const InverseForms = () => {
   const dispatch = useDispatch();
 
-  const legs = useSelector((state) => state.legs.info);
-
-  const onClick = () => {
+  const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
+  
+  const onClick = () => { // reset tuşu ile ilgili değerler sıfırlanıyor
     dispatch(setRx(0));
     dispatch(setRy(0));
     dispatch(setRz(0));
@@ -50,8 +51,8 @@ export const InverseForms = () => {
         INVERSE KINEMATICS
       </Text>
 
-      <Box marginTop={"15px"}>
-        <Tslider />
+      <Box marginTop={"15px"}> 
+        <Tslider /> 
         <Rslider />
       </Box>
 
@@ -91,7 +92,7 @@ export const InverseForms = () => {
             </Thead>
             <Tbody>
               {legs &&
-                legs.map((leg, index) => (
+                legs.map((leg, index) => ( // açı değerleri tabloya yazdırılıyor
                   <Tr key={index}>
                     <Td fontFamily={"cursive"} fontSize="20px" color="tomato">
                       {leg.name}
@@ -128,7 +129,9 @@ export const InverseForms = () => {
       </Box>
 
       <Box float={"left"} marginLeft={"30px"}>
-        <Button onClick={()=>onClick()} colorScheme="blue">Reset</Button>
+        <Button onClick={() => onClick()} colorScheme="blue">
+          Reset
+        </Button>
       </Box>
     </Box>
   );
