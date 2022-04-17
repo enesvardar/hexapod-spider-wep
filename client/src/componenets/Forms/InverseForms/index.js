@@ -40,7 +40,8 @@ export const InverseForms = () => {
 
   return (
     <Box width={"30%"}>
-      <Navbars />
+      
+      <Navbars /> 
 
       <Text
         marginTop={"10px"}
