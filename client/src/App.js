@@ -3,18 +3,13 @@ import { fetchBodyTransform, fetchBodyParameter } from "./api";
 import { Flex, Text } from "@chakra-ui/react";
 import { InverseForms } from "./componenets/Forms/InverseForms";
 import { ForwardForms } from "./componenets/Forms/ForwardForms";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Draw } from "./componenets/Draw";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { setLegs } from "./redux/legs/legsSlice";
 
 function App() {
-
   const coxia = useSelector((state) => state.body.coxia);
   const tibia = useSelector((state) => state.body.tibia);
   const femuar = useSelector((state) => state.body.femuar);
@@ -27,8 +22,9 @@ function App() {
   const tY = useSelector((state) => state.body.tY);
   const tZ = useSelector((state) => state.body.tZ);
 
+  const dispatch = useDispatch();
+
   const [traces, setTraces] = useState();
-  const [angles, setTAngles] = useState();
 
   useEffect(() => {
     (async () => {
@@ -42,7 +38,7 @@ function App() {
       };
       const result = await fetchBodyTransform(data);
       setTraces(result.data.traces);
-      setTAngles(result.data.angles);
+      dispatch(setLegs(result.data.angles));
     })();
   }, [rX, rY, rZ, tX, tY, tZ]);
 
@@ -56,26 +52,27 @@ function App() {
 
       const result = await fetchBodyParameter(data);
       setTraces(result.data.traces);
-      setTAngles(result.data.angles);
+      dispatch(setLegs(result.data.angles));
     })();
   }, [coxia, tibia, femuar]);
 
   return (
     <div className="App">
       <Router>
-
         <Flex>
-
           <Switch>
-            <Route exact path="/inverseKinematics"> <InverseForms angles={angles} /> </Route>
-            <Route path="/forwardKinematics"> <ForwardForms /> </Route>
+            <Route exact path="/inverseKinematics">
+              <InverseForms />
+            </Route>
+            <Route path="/forwardKinematics">
+              <ForwardForms />
+            </Route>
           </Switch>
 
           {traces && <Draw traces={traces} />}
         </Flex>
 
         <Flex marginLeft={"10px"}>
-
           <ul>
             <li>
               <Link to="/inverseKinematics">
@@ -92,15 +89,10 @@ function App() {
               </Link>
             </li>
           </ul>
-
-          </Flex>
-
+        </Flex>
       </Router>
-
     </div>
   );
-} 
+}
 
 export default App;
-
-

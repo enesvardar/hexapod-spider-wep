@@ -1,16 +1,20 @@
 import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLeg } from "../../../redux/legs/legsSlice";
 import { Navbars } from "../../Navbars";
 
 export const ForwardForms = () => {
-  const legName = [
-    "leftBack",
-    "leftMiddle",
-    "leftFront",
-    "rightFront",
-    "rightMiddle",
-    "rightBack",
-  ];
+
+
+  const legs = useSelector((state) => state.legs.info);
+  const dispatch = useDispatch()
+
+  const onChange = (data) => {
+    
+    dispatch(setLeg(data))
+
+  }
 
   return (
     <Box width={"30%"}>
@@ -26,11 +30,13 @@ export const ForwardForms = () => {
       </Text>
 
       <Box marginTop={"10px"}>
-        {legName.map((name, index) => (
+        {
+        legs &&
+        (legs.map((leg, index) => (
           <Flex key={index} marginLeft={"5px"}>
             <Box marginTop={"20px"} width={"150px"}>
               <Text fontFamily={"cursive"} fontSize="20px" color="green">
-                {name}
+                {leg.name}
               </Text>
             </Box>
 
@@ -38,26 +44,27 @@ export const ForwardForms = () => {
               <Flex>
                 <Box marginRight={"10px"}>
                   <Text fontFamily={"cursive"} fontSize="20px" color="tomato">
-                    alpha
+                  alpha
                   </Text>
-                  <Input width="100px" type={"number"} />
+                  <Input value={leg.alpha} onChange={(e)=>{onChange({value:e.target.value, angle:"alpha", index:index})}} width="100px" type={"number"} />
                 </Box>
                 <Box marginRight={"10px"}>
                   <Text fontFamily={"cursive"} fontSize="20px" color="tomato">
                     beta
                   </Text>
-                  <Input width="100px" type={"number"} />
+                  <Input value={leg.beta} onChange={(e)=>{onChange({value:e.target.value, angle:"beta", index:index})}} width="100px" type={"number"} />
                 </Box>
                 <Box marginRight={"10px"}>
                   <Text fontFamily={"cursive"} fontSize="20px" color="tomato">
                     gama
                   </Text>
-                  <Input width="100px" type={"number"} />
+                  <Input value={leg.gama} onChange={(e)=>{onChange({value:e.target.value, angle:"gama", index:index})}} width="100px" type={"number"} />
                 </Box>
               </Flex>
             </Box>
           </Flex>
-        ))}
+        )))}
+        
       </Box>
 
       <Box float={"left"} marginLeft={"30px"}>

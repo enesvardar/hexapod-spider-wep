@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
 import React from "react";
 import { Tslider } from "../../Sliders/Tslider";
 import { Rslider } from "../../Sliders/Rslider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {
   setRx,
   setRy,
@@ -23,8 +23,10 @@ import {
 } from "@chakra-ui/react";
 import { Navbars } from "../../Navbars";
 
-export const InverseForms = ({ angles }) => {
+export const InverseForms = () => {
   const dispatch = useDispatch();
+
+  const legs = useSelector((state) => state.legs.info);
 
   const onClick = () => {
     dispatch(setRx(0));
@@ -88,11 +90,11 @@ export const InverseForms = ({ angles }) => {
               </Tr>
             </Thead>
             <Tbody>
-              {angles &&
-                angles.map((item, index) => (
+              {legs &&
+                legs.map((leg, index) => (
                   <Tr key={index}>
                     <Td fontFamily={"cursive"} fontSize="20px" color="tomato">
-                      {item.name}
+                      {leg.name}
                     </Td>
                     <Td
                       fontFamily={"cursive"}
@@ -100,7 +102,7 @@ export const InverseForms = ({ angles }) => {
                       color="tomato"
                       isNumeric
                     >
-                      {item.alpha}
+                      {leg.alpha}
                     </Td>
                     <Td
                       fontFamily={"cursive"}
@@ -108,7 +110,7 @@ export const InverseForms = ({ angles }) => {
                       color="tomato"
                       isNumeric
                     >
-                      {item.beta}
+                      {leg.beta}
                     </Td>
                     <Td
                       fontFamily={"cursive"}
@@ -116,7 +118,7 @@ export const InverseForms = ({ angles }) => {
                       color="tomato"
                       isNumeric
                     >
-                      {item.gama}
+                      {leg.gama}
                     </Td>
                   </Tr>
                 ))}
