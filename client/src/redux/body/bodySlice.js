@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// hexapodun parametrik değerlerini tutan data
 export const bodySlice = createSlice({
   name: "body",
   initialState: {
@@ -8,6 +9,7 @@ export const bodySlice = createSlice({
     tibia: 70,
     femuar: 92,
 
+    // Tx,vb değerleri slider değişimi kadar değiştirmek için aşağıdaki değişkenler oluşturuldu.
     bufSldTx: 0,
     bufSldTy: 0,
     bufSldTz: 0,

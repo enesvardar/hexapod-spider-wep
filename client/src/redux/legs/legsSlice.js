@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// örnek olarak aşağıdaki değerleri tutmak için oluşturuldu.
+// NAME	      ALPHA	BETA	GAMA
+// leftBack	    0	  -40	   32
+// leftMiddle	  0	  -40	   32
+// leftFront	  0	  -40	   32
+// rightFront	  0	  -40	   32
+// rightMiddle	0	  -40	   32
+// rightBack	  0	  -40	   32
+
 export const legsSlice = createSlice({
   name: "legs",
 
