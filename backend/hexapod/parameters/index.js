@@ -4,13 +4,13 @@ const MyVector3 = require("../classes/MyMath/Vector3");
 class Parameters {
   constructor() {
 
-    this.coxia = 50;
+    this.coxia = 53;
     this.tibia = 70;
     this.femuar = 92;
-    this.bodyZ = this.femuar / 2
+    this.bodyZ = 46
     
     this.bodyLocalEulerAngles = new MyVector3(0, 0, 0);
-    this.bodyLocalPosition = new MyVector3(0, 0, 0);
+    this.bodyLocalPosition = new MyVector3(0, 0, this.bodyZ);
     
     this.lenght = this.coxia + this.tibia;
 
@@ -36,6 +36,9 @@ class Parameters {
         0
       )
     );
+
+    console.log(this.lbLegBaseFORG)
+
     this.lmLegBaseFORG = sumMyVector3(
       this.lmContCntrPnt,
       new MyVector3(

@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { Tslider } from "../../Sliders/Tslider";
 import { Rslider } from "../../Sliders/Rslider";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,14 +22,42 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { Navbars } from "../../Navbars";
+import { setTraces } from "../../../redux/traces/tracesSlice";
+import { fetchBodyInverse } from "../../../api";
 
 // Bu form hexapod tx/ty/tz/rx/ry/rz değerlerini güncellemek için oluşturuldu
 export const InverseForms = () => {
+  
+  const [angles, setAngles] = useState();
+
   const dispatch = useDispatch();
 
-  const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
-  
-  const onClick = () => { // reset tuşu ile ilgili değerler sıfırlanıyor
+  const rX = useSelector((state) => state.body.rX);
+  const rY = useSelector((state) => state.body.rY);
+  const rZ = useSelector((state) => state.body.rZ);
+
+  const tX = useSelector((state) => state.body.tX);
+  const tY = useSelector((state) => state.body.tY);
+  const tZ = useSelector((state) => state.body.tZ);
+
+  useEffect(() => {
+    (async () => {
+      const data = {
+        rX: rX,
+        rY: rY,
+        rZ: rZ,
+        tX: tX,
+        tY: tY,
+        tZ: tZ,
+      };
+      const result = await fetchBodyInverse(data);
+      dispatch(setTraces(result.data.traces));
+      setAngles(result.data.angles)
+    })();
+  }, [rX, rY, rZ, tX, tY, tZ]);
+
+  const onClick = () => {
+    // reset tuşu ile ilgili değerler sıfırlanıyor
     dispatch(setRx(0));
     dispatch(setRy(0));
     dispatch(setRz(0));
@@ -40,8 +68,7 @@ export const InverseForms = () => {
 
   return (
     <Box width={"30%"}>
-      
-      <Navbars /> 
+      <Navbars />
 
       <Text
         marginTop={"10px"}
@@ -52,8 +79,8 @@ export const InverseForms = () => {
         INVERSE KINEMATICS
       </Text>
 
-      <Box marginTop={"15px"}> 
-        <Tslider /> 
+      <Box marginTop={"15px"}>
+        <Tslider />
         <Rslider />
       </Box>
 
@@ -92,38 +119,43 @@ export const InverseForms = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {legs &&
-                legs.map((leg, index) => ( // açı değerleri tabloya yazdırılıyor
-                  <Tr key={index}>
-                    <Td fontFamily={"cursive"} fontSize="20px" color="tomato">
-                      {leg.name}
-                    </Td>
-                    <Td
-                      fontFamily={"cursive"}
-                      fontSize="20px"
-                      color="tomato"
-                      isNumeric
-                    >
-                      {leg.alpha}
-                    </Td>
-                    <Td
-                      fontFamily={"cursive"}
-                      fontSize="20px"
-                      color="tomato"
-                      isNumeric
-                    >
-                      {leg.beta}
-                    </Td>
-                    <Td
-                      fontFamily={"cursive"}
-                      fontSize="20px"
-                      color="tomato"
-                      isNumeric
-                    >
-                      {leg.gama}
-                    </Td>
-                  </Tr>
-                ))}
+              {angles &&
+                angles.map(
+                  (
+                    leg,
+                    index // açı değerleri tabloya yazdırılıyor
+                  ) => (
+                    <Tr key={index}>
+                      <Td fontFamily={"cursive"} fontSize="20px" color="tomato">
+                        {leg.name}
+                      </Td>
+                      <Td
+                        fontFamily={"cursive"}
+                        fontSize="20px"
+                        color="tomato"
+                        isNumeric
+                      >
+                        {leg.alpha}
+                      </Td>
+                      <Td
+                        fontFamily={"cursive"}
+                        fontSize="20px"
+                        color="tomato"
+                        isNumeric
+                      >
+                        {leg.beta}
+                      </Td>
+                      <Td
+                        fontFamily={"cursive"}
+                        fontSize="20px"
+                        color="tomato"
+                        isNumeric
+                      >
+                        {leg.gama}
+                      </Td>
+                    </Tr>
+                  )
+                )}
             </Tbody>
           </Table>
         </TableContainer>

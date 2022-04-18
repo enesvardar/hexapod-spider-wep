@@ -6,7 +6,7 @@ const MyVector3 = require("../MyMath/Vector3");
 const MyVector4 = require("../MyMath/Vector4");
 
 class MyLeg {
-  constructor(name) {
+  constructor(name,_endOfset) {
     this.name = name
     switch (name) {
       case "leftBack":
@@ -44,9 +44,39 @@ class MyLeg {
         break;
     }
 
+    
+    let _endOfsetX = 0;
+    let _endOfsetY = 0;
+
+    if ((this.legBaseFORG.x) > 0)
+    {
+        _endOfsetX = _endOfset * -1;
+    }
+    else
+    {
+        _endOfsetX = _endOfset;
+    }
+
+    if((this.legBaseFORG.y) < 0)
+    {
+        _endOfsetX /= 2;
+        _endOfsetY = _endOfset/2;
+    }
+    else if((this.legBaseFORG.y) > 0)
+    {
+        _endOfsetX /= 2;
+        _endOfsetY = (_endOfset / 2) * -1;
+    }
+    
+    this.legBaseFORG = new MyVector3(this.legBaseFORG.x + _endOfsetX, this.legBaseFORG.y +_endOfsetY, this.legBaseFORG.z);
+
     this.alphaAngleRad = 0;
     this.betaAngleRad = 0;
     this.gamaAngleRad = 0;
+
+    this.alphaAngleDeg = 0;
+    this.betaAngleDeg = 0;
+    this.gamaAngleDeg = 0;
 
     this.alphaPos = this.legCCP;
     this.betaPos = 0;
@@ -73,7 +103,7 @@ class MyLeg {
     T.Rotate(rotation);
 
     let alphaPosForOrigin = this.GetAlphaPosForOrigin();
-
+    
     T.m03 = alphaPosForOrigin.x;
     T.m13 = alphaPosForOrigin.y;
     T.m23 = alphaPosForOrigin.z;
@@ -138,8 +168,41 @@ class MyLeg {
   GetGamaPosForOrigin() {
 
     var Q1 = this.alphaAngleRad;
-    var Q2 = this.gamaAngleRad;
+    var Q2 = -this.betaAngleRad;
 
+    var rotation = new MyQuaternion();
+
+    rotation.EulertoQuaternion(
+      new MyVector3(
+        this.legLocalEulerAngles.x + pr.bodyLocalEulerAngles.x,
+        this.legLocalEulerAngles.y + pr.bodyLocalEulerAngles.y,
+        this.legLocalEulerAngles.z + pr.bodyLocalEulerAngles.z + Q1 * 180 / Math.PI
+      )
+    );
+
+    let T = new MyMatrix4x4();
+    T.Rotate(rotation);
+
+    let alphaPosForOrigin = this.GetAlphaPosForOrigin();
+
+    T.m03 = alphaPosForOrigin.x;
+    T.m13 = alphaPosForOrigin.y;
+    T.m23 = alphaPosForOrigin.z;
+
+    var pos = new MyVector4(Math.cos(Q1) * (pr.coxia + pr.tibia * Math.cos(Q2)),
+      Math.sin(Q1) * (pr.coxia + pr.tibia * Math.cos(Q2)),
+      pr.tibia * Math.sin(Q2),
+      1);
+
+    return dotMyVector4(T, pos);
+  }
+
+  GetTestForOrigin() {
+
+    var Q1 = this.alphaAngleRad;
+    var Q2 = -this.betaAngleRad;
+    var Q3 = -this.gamaAngleRad;
+    
     var rotation = new MyQuaternion();
 
     rotation.EulertoQuaternion(
@@ -234,14 +297,25 @@ class MyLeg {
       this.gamaAngleRad = gamaAngleX[1];
     }
 
-    this.ForwardKinematics();
-  }
-
-  ForwardKinematics() {
     this.alphaPos = this.GetAlphaPosForOrigin();
     this.betaPos = this.GetBetaPosForOrigin();
     this.gamaPos = this.GetGamaPosForOrigin();
+    
+    this.alphaAngleDeg = this.alphaAngleRad * 180 / Math.PI;
+    this.betaAngleDeg = -this.betaAngleRad * 180 / Math.PI;
+    this.gamaAngleDeg = -this.gamaAngleRad * 180 / Math.PI;
+  }
 
+  ForwardKinematics() {
+
+    this.alphaAngleRad = this.alphaAngleDeg  * Math.PI / 180;
+    this.betaAngleRad =  this.betaAngleDeg * Math.PI / 180;
+    this.gamaAngleRad = this.gamaAngleDeg * Math.PI / 180;
+
+    this.alphaPos = this.GetAlphaPosForOrigin();
+    this.betaPos = this.GetBetaPosForOrigin();
+    this.gamaPos = this.GetGamaPosForOrigin();
+    this.legBaseFORG = this.GetLegBaseForOrigin();
   }
 }
 

@@ -1,7 +1,9 @@
 import { Box, Button, Flex, Input, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchBodyParameter } from "../../api";
 import { setCoxia, setFemuar, setTibia } from "../../redux/body/bodySlice";
+import { setTraces } from "../../redux/traces/tracesSlice";
 
 export const Navbars = () => {
   const coxia = useSelector((state) => state.body.coxia);
@@ -15,6 +17,19 @@ export const Navbars = () => {
     dispatch(setTibia(70));
     dispatch(setFemuar(92));
   };
+
+  useEffect(() => {
+    (async () => {
+      const data = {
+        coxia: coxia,
+        tibia: tibia,
+        femuar: femuar,
+      };
+
+      // const result = await fetchBodyParameter(data);
+      // dispatch(setTraces(result.data.traces));
+    })();
+  }, [coxia, tibia, femuar]);
 
   return (
     <Box width={"30%"}>

@@ -6,12 +6,10 @@ exports.createBodyPlotData = () => {
 
   for (let i = 0; i < 6; i++) {
 
-     hexapod.joints[i].InverseKinematicsForEndJoint();
-
      let name = hexapod.joints[i].name
-     let alpha = Math.round(hexapod.joints[i].alphaAngleRad * 180 / Math.PI)
-     let beta = Math.round(hexapod.joints[i].betaAngleRad * 180 / Math.PI)
-     let gama = Math.round(hexapod.joints[i].gamaAngleRad * 180 / Math.PI)
+     let alpha = Math.round(hexapod.joints[i].alphaAngleDeg)
+     let beta = Math.round(hexapod.joints[i].betaAngleDeg)
+     let gama = Math.round(hexapod.joints[i].gamaAngleDeg)
 
      let x = [];
      let y = [];

@@ -1,18 +1,30 @@
 import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLeg } from "../../../redux/legs/legsSlice";
+import { fetchLegInfo } from "../../../api";
+import { setLeg, setLegs } from "../../../redux/legs/legsSlice";
 import { Navbars } from "../../Navbars";
 
 // Bu form her bir bacağın istenilen açı bilgisinin değiştirilebilmesi için kullanılır.
 export const ForwardForms = () => {
+
   const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
+  console.log(legs)
   const dispatch = useDispatch();
 
   const onChange = (data) => {
     dispatch(setLeg(data));
   };
+  
+  useEffect(() => {
+    (async () => {
 
+      const result = await fetchLegInfo();
+      console.log(result.data)
+      dispatch(setLegs(result.data));
+    })();
+  }, [])
+  
   return (
     <Box width={"30%"}>
       {/* hexapodun uzul parametreleri bu navbar üzerinden değiştirilir */}
@@ -47,7 +59,7 @@ export const ForwardForms = () => {
                       value={leg.alpha}
                       onChange={(e) => {
                         onChange({
-                          value: e.target.value,
+                          value: Number(e.target.value),
                           angle: "alpha",
                           index: index,
                         });
@@ -64,7 +76,7 @@ export const ForwardForms = () => {
                       value={leg.beta}
                       onChange={(e) => {
                         onChange({
-                          value: e.target.value,
+                          value: Number(e.target.value),
                           angle: "beta",
                           index: index,
                         });
@@ -81,7 +93,7 @@ export const ForwardForms = () => {
                       value={leg.gama}
                       onChange={(e) => {
                         onChange({
-                          value: e.target.value,
+                          value: Number(e.target.value),
                           angle: "gama",
                           index: index,
                         });

@@ -22,16 +22,13 @@ export const legsSlice = createSlice({
     },
 
     setLeg: (state, action) => {
-      if(action.payload.angle == "alpha"){
+      if (action.payload.angle == "alpha") {
         state.info[action.payload.index].alpha = action.payload.value;
-      }
-      else if(action.payload.beta == "beta"){
+      } else if (action.payload.angle == "beta") {
         state.info[action.payload.index].beta = action.payload.value;
-      }
-      else if(action.payload.angle == "gama"){
+      } else if (action.payload.angle == "gama") {
         state.info[action.payload.index].gama = action.payload.value;
       }
-
     },
   },
 });
