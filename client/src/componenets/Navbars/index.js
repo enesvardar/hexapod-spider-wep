@@ -26,8 +26,9 @@ export const Navbars = () => {
         femuar: femuar,
       };
 
-      // const result = await fetchBodyParameter(data);
-      // dispatch(setTraces(result.data.traces));
+      const result = await fetchBodyParameter(data);
+      dispatch(setTraces(result.data.traces));
+    
     })();
   }, [coxia, tibia, femuar]);
 

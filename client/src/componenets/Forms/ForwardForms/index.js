@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLegInfo } from "../../../api";
+import { fetchLegInfo, fetchForward } from "../../../api";
 import { setLeg, setLegs } from "../../../redux/legs/legsSlice";
 import { Navbars } from "../../Navbars";
 
@@ -9,10 +9,16 @@ import { Navbars } from "../../Navbars";
 export const ForwardForms = () => {
 
   const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
-  console.log(legs)
   const dispatch = useDispatch();
 
   const onChange = (data) => {
+    console.log(data)
+
+    (async () => {
+
+      fetchForward(data)
+    })();
+
     dispatch(setLeg(data));
   };
   
