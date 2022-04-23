@@ -72,9 +72,9 @@ export const InverseForms = () => {
 
       <Text
         marginTop={"10px"}
-        fontFamily={"cursive"}
+        fontFamily= {"Comic Sans MS"}
         fontSize="45px"
-        color="green"
+        color="#a5f0be"
       >
         INVERSE KINEMATICS
       </Text>
@@ -89,13 +89,13 @@ export const InverseForms = () => {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th fontFamily={"cursive"} fontSize="20px" color="green">
+                <Th fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
                   name
                 </Th>
                 <Th
                   fontFamily={"cursive"}
                   fontSize="20px"
-                  color="green"
+                  color="#a5f0be"
                   isNumeric
                 >
                   alpha
@@ -103,7 +103,7 @@ export const InverseForms = () => {
                 <Th
                   fontFamily={"cursive"}
                   fontSize="20px"
-                  color="green"
+                  color="#a5f0be"
                   isNumeric
                 >
                   beta
@@ -111,7 +111,7 @@ export const InverseForms = () => {
                 <Th
                   fontFamily={"cursive"}
                   fontSize="20px"
-                  color="green"
+                  color="#a5f0be"
                   isNumeric
                 >
                   gama
@@ -132,7 +132,7 @@ export const InverseForms = () => {
                       <Td
                         fontFamily={"cursive"}
                         fontSize="20px"
-                        color="tomato"
+                        color="white"
                         isNumeric
                       >
                         {leg.alpha}
@@ -140,7 +140,7 @@ export const InverseForms = () => {
                       <Td
                         fontFamily={"cursive"}
                         fontSize="20px"
-                        color="tomato"
+                        color="white"
                         isNumeric
                       >
                         {leg.beta}
@@ -148,7 +148,7 @@ export const InverseForms = () => {
                       <Td
                         fontFamily={"cursive"}
                         fontSize="20px"
-                        color="tomato"
+                        color="white"
                         isNumeric
                       >
                         {leg.gama}
@@ -161,8 +161,8 @@ export const InverseForms = () => {
         </TableContainer>
       </Box>
 
-      <Box float={"left"} marginLeft={"30px"}>
-        <Button onClick={() => onClick()} colorScheme="blue">
+      <Box float={"left"} marginTop={"20px"} marginBottom={"20px"}>
+        <Button onClick={() => onClick()} bgColor="#a5f0be">
           Reset
         </Button>
       </Box>

@@ -27,9 +27,9 @@ exports.createBodyPlotData = () => {
      y.push(hexapod.joints[i].gamaPos.y);
      z.push(hexapod.joints[i].gamaPos.z);
 
-     x.push(hexapod.joints[i].legBaseFORG.x);
-     y.push(hexapod.joints[i].legBaseFORG.y);
-     z.push(hexapod.joints[i].legBaseFORG.z);
+     x.push(hexapod.joints[i].legBasePos.x);
+     y.push(hexapod.joints[i].legBasePos.y);
+     z.push(hexapod.joints[i].legBasePos.z);
 
      traces.push({ x, y, z});
      angles.push({name,alpha,beta,gama})

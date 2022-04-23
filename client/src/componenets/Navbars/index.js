@@ -36,7 +36,7 @@ export const Navbars = () => {
     <Box width={"30%"}>
       <Flex marginLeft={"30px"}>
         <Box>
-          <Text fontFamily={"cursive"} fontSize="20px" color="green">
+          <Text fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
             coxia
           </Text>
           <Input
@@ -47,10 +47,11 @@ export const Navbars = () => {
             marginLeft={1}
             width="100px"
             type={"number"}
+            color="white"
           />
         </Box>
         <Box>
-          <Text fontFamily={"cursive"} fontSize="20px" color="green">
+          <Text fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
             tibia
           </Text>
           <Input
@@ -61,10 +62,11 @@ export const Navbars = () => {
             marginLeft={1}
             width="100px"
             type={"number"}
+            color="white"
           />
         </Box>
         <Box>
-          <Text fontFamily={"cursive"} fontSize="20px" color="green">
+          <Text fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
             femuar
           </Text>
           <Input
@@ -75,10 +77,11 @@ export const Navbars = () => {
             marginLeft={1}
             width="100px"
             type={"number"}
+            color="white"
           />
         </Box>
         <Box marginTop={"30px"} marginLeft={"15px"}>
-          <Button onClick={() => onClick()} colorScheme="blue">
+          <Button onClick={() => onClick()} bgColor="#a5f0be">
             Reset
           </Button>
         </Box>

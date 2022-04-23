@@ -28,17 +28,21 @@ class Hexapod {
   }
 
   legUpdate(data) {
-    try {
-      for (let i = 0; i < 6; i++) {
-        this.joints[i].alphaAngleRad = (data[i].alpha * Math.PI) / 180;
-        this.joints[i].betaAngleRad = (data[i].beta * Math.PI) / 180;
-        this.joints[i].gamaAngleRad = (data[i].gama * Math.PI) / 180;
-      }
-    } catch (error) {}
 
-    for (let i = 0; i < 6; i++) {
-      this.joints[i].ForwardKinematics();
+    if(data.angle == "alpha"){
+      this.joints[data.index].alphaAngleDeg = (data.value)
     }
+    else if(data.angle == "beta"){
+      this.joints[data.index].betaAngleDeg = (data.value)
+    }
+    else if(data.angle == "gama"){
+      this.joints[data.index].gamaAngleDeg = (data.value)
+    }
+
+    
+    this.joints[data.index].ForwardKinematics();
+    
+
   }
 
   bodyUpdate(data) {

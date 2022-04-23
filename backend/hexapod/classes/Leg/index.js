@@ -111,6 +111,7 @@ class MyLeg {
     var trans = dotMyVector4(T, new MyVector4(this.legBaseFCCP.x, this.legBaseFCCP.y, this.legBaseFCCP.z, 1.0));
 
     this.legBaseFORG = new MyVector3(trans.x, trans.y, this.legBaseFORG.z);
+    this.legBasePos = this.legBaseFORG
   }
 
   GetAlphaPosForOrigin() {
@@ -193,11 +194,11 @@ class MyLeg {
       Math.sin(Q1) * (pr.coxia + pr.tibia * Math.cos(Q2)),
       pr.tibia * Math.sin(Q2),
       1);
-
+    
     return dotMyVector4(T, pos);
   }
 
-  GetTestForOrigin() {
+  GetLegBaseForOrigin() {
 
     var Q1 = this.alphaAngleRad;
     var Q2 = -this.betaAngleRad;
@@ -222,11 +223,12 @@ class MyLeg {
     T.m13 = alphaPosForOrigin.y;
     T.m23 = alphaPosForOrigin.z;
 
-    var pos = new MyVector4(Math.cos(Q1) * (pr.coxia + pr.tibia * Math.cos(Q2)),
-      Math.sin(Q1) * (pr.coxia + pr.tibia * Math.cos(Q2)),
-      pr.tibia * Math.sin(Q2),
+    var pos = new MyVector4(
+      Math.cos(Q1)*(pr.coxia + 1.0*pr.femuar * Math.sin(Q2 + Q3) + pr.tibia * Math.cos(Q2)),
+      Math.sin(Q1)*(pr.coxia - 1.0*pr.femuar * Math.sin(Q2 + Q3) + pr.tibia * Math.cos(Q2)),
+      -pr.femuar * Math.cos(Q2 + Q3) + pr.tibia * Math.sin(Q2),
       1);
-
+    
     return dotMyVector4(T, pos);
   }
 
@@ -300,10 +302,11 @@ class MyLeg {
     this.alphaPos = this.GetAlphaPosForOrigin();
     this.betaPos = this.GetBetaPosForOrigin();
     this.gamaPos = this.GetGamaPosForOrigin();
+    this.legBasePos = this.GetLegBaseForOrigin();
     
     this.alphaAngleDeg = this.alphaAngleRad * 180 / Math.PI;
-    this.betaAngleDeg = -this.betaAngleRad * 180 / Math.PI;
-    this.gamaAngleDeg = -this.gamaAngleRad * 180 / Math.PI;
+    this.betaAngleDeg = this.betaAngleRad * 180 / Math.PI;
+    this.gamaAngleDeg = this.gamaAngleRad * 180 / Math.PI;
   }
 
   ForwardKinematics() {
@@ -315,7 +318,7 @@ class MyLeg {
     this.alphaPos = this.GetAlphaPosForOrigin();
     this.betaPos = this.GetBetaPosForOrigin();
     this.gamaPos = this.GetGamaPosForOrigin();
-    this.legBaseFORG = this.GetLegBaseForOrigin();
+    this.legBasePos = this.GetLegBaseForOrigin();
   }
 }
 

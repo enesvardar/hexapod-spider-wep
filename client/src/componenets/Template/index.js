@@ -1,13 +1,10 @@
-import React from "react";
-import Plot from "react-plotly.js";
-
 const COG_COLOR = "#32ff7e";
 const COG_SIZE = 14;
 const BODY_COLOR = "#FC427B";
 const BODY_OUTLINE_WIDTH = 12;
 const AXIS_ZERO_LINE_COLOR = "#079992";
-const PAPER_BG_COLOR = "rgb(255, 255, 255)";
-const GROUND_COLOR = "rgb(200, 255, 255)";
+const PAPER_BG_COLOR = "rgb(49, 56, 51)";
+const GROUND_COLOR = "rgb(144, 150, 146)";
 
 const CAMERA_VIEW = {
   center: {

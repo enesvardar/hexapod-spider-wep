@@ -37,8 +37,6 @@ class Parameters {
       )
     );
 
-    console.log(this.lbLegBaseFORG)
-
     this.lmLegBaseFORG = sumMyVector3(
       this.lmContCntrPnt,
       new MyVector3(

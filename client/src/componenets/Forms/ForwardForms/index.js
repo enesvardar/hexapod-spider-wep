@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Text, Input } from "@chakra-ui/react";
+import { Box, Flex, Text, Input } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLegInfo, fetchForward } from "../../../api";
 import { setLeg, setLegs } from "../../../redux/legs/legsSlice";
+import { setTraces } from "../../../redux/traces/tracesSlice";
 import { Navbars } from "../../Navbars";
 
 // Bu form her bir bacağın istenilen açı bilgisinin değiştirilebilmesi için kullanılır.
@@ -11,13 +12,11 @@ export const ForwardForms = () => {
   const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
   const dispatch = useDispatch();
 
-  const onChange = (data) => {
+  const onChange = async (data) => {
     console.log(data)
 
-    (async () => {
-
-      fetchForward(data)
-    })();
+    const result = await fetchForward(data)
+    dispatch(setTraces(result.data.traces));
 
     dispatch(setLeg(data));
   };
@@ -38,9 +37,9 @@ export const ForwardForms = () => {
 
       <Text
         marginTop={"10px"}
-        fontFamily={"cursive"}
+        fontFamily= {"Comic Sans MS"}
         fontSize="45px"
-        color="green"
+        color="#a5f0be"
       >
         FORWARD KINEMATICS
       </Text>
@@ -50,7 +49,7 @@ export const ForwardForms = () => {
           legs.map((leg, index) => (
             <Flex key={index} marginLeft={"5px"}>
               <Box marginTop={"20px"} width={"150px"}>
-                <Text fontFamily={"cursive"} fontSize="20px" color="green">
+                <Text fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
                   {leg.name}
                 </Text>
               </Box>
@@ -72,6 +71,7 @@ export const ForwardForms = () => {
                       }}
                       width="100px"
                       type={"number"}
+                      color={"white"}
                     />
                   </Box>
                   <Box marginRight={"10px"}>
@@ -89,6 +89,7 @@ export const ForwardForms = () => {
                       }}
                       width="100px"
                       type={"number"}
+                      color={"white"}
                     />
                   </Box>
                   <Box marginRight={"10px"}>
@@ -106,16 +107,13 @@ export const ForwardForms = () => {
                       }}
                       width="100px"
                       type={"number"}
+                      color={"white"}
                     />
                   </Box>
                 </Flex>
               </Box>
             </Flex>
           ))}
-      </Box>
-
-      <Box float={"left"} marginLeft={"30px"}>
-        <Button colorScheme="blue">Reset</Button>
       </Box>
     </Box>
   );
