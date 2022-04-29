@@ -54,8 +54,8 @@ export const LAYOUT = {
   paper_bgcolor: PAPER_BG_COLOR,
   showlegend: false,
   autosize: true,
-  width: 1200,
-  height: 800,
+  width: 900,
+  height: 600,
 };
 
 export const genTemplate = (traces) => {

@@ -8,53 +8,51 @@ import { Navbars } from "../../Navbars";
 
 // Bu form her bir bacağın istenilen açı bilgisinin değiştirilebilmesi için kullanılır.
 export const ForwardForms = () => {
-
   const legs = useSelector((state) => state.legs.info); // her bir bacağın açı bilgilerini tutan data
   const dispatch = useDispatch();
 
   const onChange = async (data) => {
-    console.log(data)
+    console.log(data);
 
-    const result = await fetchForward(data)
+    const result = await fetchForward(data);
     dispatch(setTraces(result.data.traces));
 
     dispatch(setLeg(data));
   };
-  
+
   useEffect(() => {
     (async () => {
-
       const result = await fetchLegInfo();
-      console.log(result.data)
+      console.log(result.data);
       dispatch(setLegs(result.data));
     })();
-  }, [])
-  
-  return (
-    <Box width={"30%"}>
-      {/* hexapodun uzul parametreleri bu navbar üzerinden değiştirilir */}
-      <Navbars />
+  }, []);
 
+  return (
+    <Box width={"700px"} height={"800px"}>
+      <Navbars />
       <Text
         marginTop={"10px"}
-        fontFamily= {"Comic Sans MS"}
-        fontSize="45px"
+        fontFamily={"Comic Sans MS"}
+        fontSize="35px"
         color="#a5f0be"
       >
         FORWARD KINEMATICS
       </Text>
 
+      {/* hexapodun uzul parametreleri bu navbar üzerinden değiştirilir */}
+      
       <Box marginTop={"10px"}>
         {legs &&
           legs.map((leg, index) => (
             <Flex key={index} marginLeft={"5px"}>
-              <Box marginTop={"20px"} width={"150px"}>
+              <Box marginTop={"40px"} width={"110px"}>
                 <Text fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
                   {leg.name}
                 </Text>
               </Box>
 
-              <Box marginLeft={"40px"}>
+              <Box marginLeft={"30px"}>
                 <Flex>
                   <Box marginRight={"10px"}>
                     <Text fontFamily={"cursive"} fontSize="20px" color="tomato">
@@ -112,9 +110,11 @@ export const ForwardForms = () => {
                   </Box>
                 </Flex>
               </Box>
+
             </Flex>
           ))}
       </Box>
+      
     </Box>
   );
 };

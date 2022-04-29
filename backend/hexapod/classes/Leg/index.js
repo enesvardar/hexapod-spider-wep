@@ -5,6 +5,7 @@ const MyQuaternion = require("../MyMath/Quaternion");
 const MyVector3 = require("../MyMath/Vector3");
 const MyVector4 = require("../MyMath/Vector4");
 
+
 class MyLeg {
   constructor(name,_endOfset) {
     this.name = name
@@ -87,6 +88,41 @@ class MyLeg {
     this.InverseKinematicsForEndJoint();
   }
 
+  MoveLegBasePoint(_endOfsetX, _endOfsetY, _endOfsetZ)
+  {
+      let endOfsetX = 0;
+      let endOfsetY = 0;
+      
+      if (_endOfsetY != 0)
+      {
+          endOfsetX = -Math.sin(Math.PI * pr.bodyLocalEulerAngles.z / 180) * _endOfsetY;
+
+          endOfsetY = Math.cos(Math.PI * pr.bodyLocalEulerAngles.z / 180) * _endOfsetY;
+      }
+      else if (_endOfsetX != 0)
+      {
+
+          endOfsetX = Math.cos(Math.PI * pr.bodyLocalEulerAngles.z / 180) * _endOfsetX;
+
+          endOfsetY = Math.sin(Math.PI * pr.bodyLocalEulerAngles.z / 180) * _endOfsetX;
+      }
+
+
+      this.legBaseFORG = new MyVector3(this.legBaseFORG.x + endOfsetX, this.legBaseFORG.y + endOfsetY, this.legBaseFORG.z + _endOfsetZ);
+  }
+
+  UpdateLegBaseFCCP()
+  {
+      Q1 = alphaAngleRad;
+      Q2 = betaAngleRad;
+      Q3 = gamaAngleRad;
+      
+      px = (float)(Math.cos(Q1) * (pr.coxia + pr.femuarX * Math.cos(Q2 + Q3) - 1.0 * pr.femuarH * Math.sin(Q2 + Q3) + pr.tibiaX * Math.cos(Q2) - pr.tibiaH * Math.sin(Q2)));
+      py = (float)(Math.sin(Q1) * (pr.coxia + pr.femuarX * Math.cos(Q2 + Q3) - 1.0 * pr.femuarH * Math.sin(Q2 + Q3) + pr.tibiaX * Math.cos(Q2) - pr.tibiaH * Math.sin(Q2)));
+      pz = -pr.femuarH * Math.cos(Q2 + Q3) - pr.femuarX * Math.sin(Q2 + Q3) - pr.tibiaH * Math.cos(Q2) - pr.tibiaX * Math.sin(Q2);
+
+      legBaseFCCP = new MyVector3(px, py, pz);
+  }
 
   UpdateLegBaseFORG(ofsetZ) {
     var rotation = new MyQuaternion();

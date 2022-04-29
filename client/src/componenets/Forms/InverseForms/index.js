@@ -27,7 +27,6 @@ import { fetchBodyInverse } from "../../../api";
 
 // Bu form hexapod tx/ty/tz/rx/ry/rz değerlerini güncellemek için oluşturuldu
 export const InverseForms = () => {
-  
   const [angles, setAngles] = useState();
 
   const dispatch = useDispatch();
@@ -52,7 +51,7 @@ export const InverseForms = () => {
       };
       const result = await fetchBodyInverse(data);
       dispatch(setTraces(result.data.traces));
-      setAngles(result.data.angles)
+      setAngles(result.data.angles);
     })();
   }, [rX, rY, rZ, tX, tY, tZ]);
 
@@ -67,13 +66,12 @@ export const InverseForms = () => {
   };
 
   return (
-    <Box width={"30%"}>
+    <Box width={"700px"} height={"800px"}>
       <Navbars />
-
       <Text
         marginTop={"10px"}
-        fontFamily= {"Comic Sans MS"}
-        fontSize="45px"
+        fontFamily={"Comic Sans MS"}
+        fontSize="35px"
         color="#a5f0be"
       >
         INVERSE KINEMATICS
@@ -89,12 +87,12 @@ export const InverseForms = () => {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th fontFamily={"cursive"} fontSize="20px" color="#a5f0be">
+                <Th fontFamily={"cursive"} fontSize="15px" color="#a5f0be">
                   name
                 </Th>
                 <Th
                   fontFamily={"cursive"}
-                  fontSize="20px"
+                  fontSize="15px"
                   color="#a5f0be"
                   isNumeric
                 >
@@ -102,7 +100,7 @@ export const InverseForms = () => {
                 </Th>
                 <Th
                   fontFamily={"cursive"}
-                  fontSize="20px"
+                  fontSize="15px"
                   color="#a5f0be"
                   isNumeric
                 >
@@ -110,7 +108,7 @@ export const InverseForms = () => {
                 </Th>
                 <Th
                   fontFamily={"cursive"}
-                  fontSize="20px"
+                  fontSize="15px"
                   color="#a5f0be"
                   isNumeric
                 >
@@ -126,12 +124,12 @@ export const InverseForms = () => {
                     index // açı değerleri tabloya yazdırılıyor
                   ) => (
                     <Tr key={index}>
-                      <Td fontFamily={"cursive"} fontSize="20px" color="tomato">
+                      <Td fontFamily={"cursive"} fontSize="15px" color="tomato">
                         {leg.name}
                       </Td>
                       <Td
                         fontFamily={"cursive"}
-                        fontSize="20px"
+                        fontSize="15px"
                         color="white"
                         isNumeric
                       >
@@ -139,7 +137,7 @@ export const InverseForms = () => {
                       </Td>
                       <Td
                         fontFamily={"cursive"}
-                        fontSize="20px"
+                        fontSize="15px"
                         color="white"
                         isNumeric
                       >
@@ -147,7 +145,7 @@ export const InverseForms = () => {
                       </Td>
                       <Td
                         fontFamily={"cursive"}
-                        fontSize="20px"
+                        fontSize="15px"
                         color="white"
                         isNumeric
                       >
@@ -160,8 +158,7 @@ export const InverseForms = () => {
           </Table>
         </TableContainer>
       </Box>
-
-      <Box float={"left"} marginTop={"20px"} marginBottom={"20px"}>
+      <Box float={"right"} marginTop={"2px"} marginBottom={"20px"}>
         <Button onClick={() => onClick()} bgColor="#a5f0be">
           Reset
         </Button>
