@@ -8,21 +8,20 @@ export const WalkingForms = () => {
   const [state, setState] = useState("stop");
 
   console.log(state);
+  
+  const Timer = () => {
 
-  function Timer() {
     console.log(state)
-
-    if (state === "run") {
-      setTimeout(Timer, 1000);
-    }
+    
   }
 
   useEffect(() => {
     if (state === "run") {
-      setTimeout(Timer, 1000);
+      setInterval(Timer, 1000);
     }
     else{
-      clearTimeout(Timer);
+      console.log("dur")
+      clearInterval(Timer);
     }
   }, [state]);
 
