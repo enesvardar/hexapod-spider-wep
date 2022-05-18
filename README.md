@@ -41,5 +41,5 @@ In this project, an eighteen-jointed hexapod robot was simulated in React enviro
 
 ## Run
 
-<b> for client </b>: hexapod-spider-wep\client> -> npm start <br>  
-<b> for backend </b>: hexapod-spider-wep\backend> -> npm start
+<b> for client </b>: hexapod-spider-wep\client -> npm start <br>  
+<b> for backend </b>: hexapod-spider-wep\backend -> npm start
