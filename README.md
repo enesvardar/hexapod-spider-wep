@@ -5,3 +5,10 @@
 # Announcement
 
 In this project, an eighteen-jointed hexapod robot was simulated in React environment. You can use this app to simulate the walks of a hexapod robot and more.This app is not affiliated with any external math library. 
+
+## Features
+
+🎉 Solve
+
+- [x] Inverse Kinematics
+- [x] Forward Kinematics
