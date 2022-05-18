@@ -14,6 +14,7 @@ In this project, an eighteen-jointed hexapod robot was simulated in React enviro
 - [x] Forward Kinematics
 
 ## Requirements
+
 - [x] @chakra-ui/react": "^1.8.6"
 - [x] @emotion/react": "^11.8.2"
 - [x] @emotion/styled": "^11.8.1"
@@ -32,3 +33,8 @@ In this project, an eighteen-jointed hexapod robot was simulated in React enviro
 - [x] react-scripts": "5.0.0"
 - [x] redux": "^4.1.2"
 - [x] web-vitals": "^2.1.4"
+
+## Screenshots
+
+<img src="https://github.com/enesvardar/hexapod-spider-wep/blob/main/video-gif/fwd.PNG"/>
+<img src="https://github.com/enesvardar/hexapod-spider-wep/blob/main/video-gif/inv.PNG"/>
