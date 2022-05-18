@@ -38,3 +38,14 @@ In this project, an eighteen-jointed hexapod robot was simulated in React enviro
 
 <img src="https://github.com/enesvardar/hexapod-spider-wep/blob/main/video-gif/fwd.PNG"/>
 <img src="https://github.com/enesvardar/hexapod-spider-wep/blob/main/video-gif/inv.PNG"/>
+
+## Run
+
+for client
+hexapod-spider-wep\client> 
+  npm start
+
+for backend
+hexapod-spider-wep\backend> 
+  npm start
+  
