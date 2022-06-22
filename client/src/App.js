@@ -15,7 +15,7 @@ function App() {
           <Box marginLeft={"50px"}>
             <Flex>
               <Switch>
-                <Route exact path="/inverseKinematics">
+                <Route exact path="/">
                   <InverseForms />
                 </Route>
                 <Route path="/forwardKinematics">
@@ -67,7 +67,7 @@ function App() {
                       color="yellow.500"
                       marginRight={"5px"}
                     />
-                    <Link to="/inverseKinematics">
+                    <Link to="/">
                       <Text
                         fontFamily={"cursive"}
                         fontSize="20px"
