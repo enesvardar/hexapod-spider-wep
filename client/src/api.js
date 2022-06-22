@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REACT_APP_BASE_ENDPOINT = " http://localhost:5000"
+const REACT_APP_BASE_ENDPOINT = "https://hexapod-backend.herokuapp.com"
 
 export const fetchBodyInverse = async(data) => {
     const result = await axios.post(`${REACT_APP_BASE_ENDPOINT}/inverse`,data);
